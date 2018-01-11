@@ -1,0 +1,544 @@
+{
+  "tournaments": {
+    "Настя Привет": {
+      "loops": 1,
+      "maxCountGame": 1,
+      "playoffFlag": false,
+      "teamInPlayoff": 2,
+      "teamList": [
+        {
+          "games": 0,
+          "games_lost": 0,
+          "games_won": 0,
+          "loaded": true,
+          "managed": false,
+          "points": 0,
+          "title": "1",
+          "valid": true
+        },
+        {
+          "games": 0,
+          "games_lost": 0,
+          "games_won": 0,
+          "loaded": true,
+          "managed": false,
+          "points": 0,
+          "title": "2",
+          "valid": true
+        }
+      ],
+      "teamsCount": 2,
+      "title": "Настя Привет",
+      "type": "Футбол",
+      "yearOfTourn": "2018"
+    },
+    "Рлордлро": {
+      "gameList": [
+        {
+          "day": 3,
+          "loaded": true,
+          "managed": true,
+          "month": 1,
+          "score_1": 1,
+          "score_2": 5,
+          "team_1": {
+            "games": 2,
+            "games_lost": 1,
+            "games_won": 1,
+            "loaded": true,
+            "managed": true,
+            "points": 2,
+            "title": "Оченьдлинноеназвание",
+            "valid": true
+          },
+          "team_2": {
+            "games": 2,
+            "games_lost": 1,
+            "games_won": 1,
+            "loaded": true,
+            "managed": true,
+            "points": 2,
+            "title": "Оченьдлинноеназвание",
+            "valid": true
+          },
+          "valid": true,
+          "year": 2018
+        }
+      ],
+      "loops": 1,
+      "maxCountGame": 1,
+      "playoff": {
+        "countGames": 0,
+        "playoffFirstTurGames": [
+          {
+            "day": 0,
+            "loaded": true,
+            "managed": true,
+            "month": 0,
+            "score_1": 0,
+            "score_2": 0,
+            "team_1": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Оченьдлинноеназвание",
+              "valid": true
+            },
+            "team_2": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "М",
+              "valid": true
+            },
+            "valid": true,
+            "year": 0
+          }
+        ],
+        "playoffGameList": [
+          {
+            "day": 0,
+            "loaded": true,
+            "managed": true,
+            "month": 0,
+            "score_1": 0,
+            "score_2": 0,
+            "team_1": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Оченьдлинноеназвание",
+              "valid": true
+            },
+            "team_2": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "М",
+              "valid": true
+            },
+            "valid": true,
+            "year": 0
+          }
+        ],
+        "playoffLastTurGames": [
+          {
+            "day": 0,
+            "loaded": true,
+            "managed": true,
+            "month": 0,
+            "score_1": 0,
+            "score_2": 0,
+            "team_1": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Оченьдлинноеназвание",
+              "valid": true
+            },
+            "team_2": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "М",
+              "valid": true
+            },
+            "valid": true,
+            "year": 0
+          }
+        ],
+        "playoffTeamList": [
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Оченьдлинноеназвание",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "М",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Оченьдлинноеназвание",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "М",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "__",
+            "valid": true
+          }
+        ],
+        "playoffTitle": "Рлордлро",
+        "teamInPlayoff": 2
+      },
+      "playoffFlag": true,
+      "teamInPlayoff": 2,
+      "teamList": [
+        {
+          "games": 2,
+          "games_lost": 1,
+          "games_won": 1,
+          "loaded": true,
+          "managed": true,
+          "points": 2,
+          "title": "Оченьдлинноеназвание",
+          "valid": true
+        },
+        {
+          "games": 0,
+          "games_lost": 0,
+          "games_won": 0,
+          "loaded": true,
+          "managed": true,
+          "points": 0,
+          "title": "М",
+          "valid": true
+        }
+      ],
+      "teamsCount": 2,
+      "title": "Рлордлро",
+      "type": "Баскетбол",
+      "yearOfTourn": "2018"
+    },
+    "Тест": {
+      "gameList": [
+        {
+          "day": 29,
+          "loaded": true,
+          "managed": true,
+          "month": 12,
+          "score_1": 6,
+          "score_2": 3,
+          "team_1": {
+            "games": 1,
+            "games_lost": 0,
+            "games_won": 1,
+            "loaded": true,
+            "managed": true,
+            "points": 2,
+            "title": "Команда 1",
+            "valid": true
+          },
+          "team_2": {
+            "games": 1,
+            "games_lost": 1,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Команда 2",
+            "valid": true
+          },
+          "valid": true,
+          "year": 2017
+        }
+      ],
+      "loops": 1,
+      "maxCountGame": 1,
+      "playoff": {
+        "countGames": 0,
+        "playoffFirstTurGames": [
+          {
+            "day": 0,
+            "loaded": true,
+            "managed": true,
+            "month": 0,
+            "score_1": 0,
+            "score_2": 0,
+            "team_1": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Команда 1",
+              "valid": true
+            },
+            "team_2": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Команда 2",
+              "valid": true
+            },
+            "valid": true,
+            "year": 0
+          }
+        ],
+        "playoffGameList": [
+          {
+            "day": 0,
+            "loaded": true,
+            "managed": true,
+            "month": 0,
+            "score_1": 0,
+            "score_2": 0,
+            "team_1": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Команда 1",
+              "valid": true
+            },
+            "team_2": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Команда 2",
+              "valid": true
+            },
+            "valid": true,
+            "year": 0
+          }
+        ],
+        "playoffLastTurGames": [
+          {
+            "day": 0,
+            "loaded": true,
+            "managed": true,
+            "month": 0,
+            "score_1": 0,
+            "score_2": 0,
+            "team_1": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Команда 1",
+              "valid": true
+            },
+            "team_2": {
+              "games": 0,
+              "games_lost": 0,
+              "games_won": 0,
+              "loaded": true,
+              "managed": true,
+              "points": 0,
+              "title": "Команда 2",
+              "valid": true
+            },
+            "valid": true,
+            "year": 0
+          }
+        ],
+        "playoffTeamList": [
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Команда 1",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Команда 2",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Команда 1",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "Команда 2",
+            "valid": true
+          },
+          {
+            "games": 0,
+            "games_lost": 0,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 0,
+            "title": "__",
+            "valid": true
+          }
+        ],
+        "playoffTitle": "Тест",
+        "teamInPlayoff": 2
+      },
+      "playoffFlag": true,
+      "teamInPlayoff": 2,
+      "teamList": [
+        {
+          "games": 1,
+          "games_lost": 0,
+          "games_won": 1,
+          "loaded": true,
+          "managed": true,
+          "points": 2,
+          "title": "Команда 1",
+          "valid": true
+        },
+        {
+          "games": 1,
+          "games_lost": 1,
+          "games_won": 0,
+          "loaded": true,
+          "managed": true,
+          "points": 0,
+          "title": "Команда 2",
+          "valid": true
+        }
+      ],
+      "teamsCount": 2,
+      "title": "Тест",
+      "type": "Баскетбол",
+      "yearOfTourn": "2017"
+    },
+    "Футбик": {
+      "gameList": [
+        {
+          "day": 2,
+          "loaded": true,
+          "managed": false,
+          "month": 1,
+          "score_1": 6,
+          "score_2": 3,
+          "team_1": {
+            "games": 1,
+            "games_lost": 0,
+            "games_won": 1,
+            "loaded": true,
+            "managed": true,
+            "points": 3,
+            "title": "1",
+            "valid": true
+          },
+          "team_2": {
+            "games": 1,
+            "games_lost": 1,
+            "games_won": 0,
+            "loaded": true,
+            "managed": true,
+            "points": 1,
+            "title": "2",
+            "valid": true
+          },
+          "valid": true,
+          "year": 2018
+        }
+      ],
+      "loops": 1,
+      "maxCountGame": 3,
+      "playoffFlag": false,
+      "teamInPlayoff": 2,
+      "teamList": [
+        {
+          "games": 1,
+          "games_lost": 0,
+          "games_won": 1,
+          "loaded": true,
+          "managed": true,
+          "points": 3,
+          "title": "1",
+          "valid": true
+        },
+        {
+          "games": 1,
+          "games_lost": 1,
+          "games_won": 0,
+          "loaded": true,
+          "managed": true,
+          "points": 1,
+          "title": "2",
+          "valid": true
+        },
+        {
+          "games": 0,
+          "games_lost": 0,
+          "games_won": 0,
+          "loaded": true,
+          "managed": true,
+          "points": 0,
+          "title": "Рололддлд",
+          "valid": true
+        }
+      ],
+      "teamsCount": 3,
+      "title": "Футбик",
+      "type": "Футбол",
+      "yearOfTourn": "2018"
+    }
+  }
+}
