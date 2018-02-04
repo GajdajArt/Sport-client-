@@ -59,6 +59,18 @@ public class TournamentUtil {
         return i;
     }
 
+    public static List<Team> getWinnerTeams(List<Team> teamList) {
+
+        List<Team> winnerTeams = new ArrayList<>();
+
+        for (Team team : teamList) {
+            if (team.getGames() > 0 && team.getGames_lost() == 0) {
+                winnerTeams.add(team);
+            }
+        }
+        return winnerTeams;
+    }
+
     public static Tournament simpleTournToHard(SimpleTournament oldTourn) {
 
         Tournament newTourn = new Tournament();
@@ -69,7 +81,7 @@ public class TournamentUtil {
         newTourn.setTeamInPlayoff(oldTourn.getTeamInPlayoff());
         newTourn.setTeamsCount(oldTourn.getTeamsCount());
         newTourn.setYearOfTourn(oldTourn.getYearOfTourn());
-        newTourn.setPlayoffFlag(oldTourn.getPlayoffFlag());
+        newTourn.setIsPlayoffFlag(oldTourn.getIsPlayoffFlag());
 
         List<Team> teams = new ArrayList<>();
         List<Game> games = new ArrayList<>();
@@ -95,7 +107,7 @@ public class TournamentUtil {
         newTourn.setTeamInPlayoff(oldTourn.getTeamInPlayoff());
         newTourn.setTeamsCount(oldTourn.getTeamsCount());
         newTourn.setYearOfTourn(oldTourn.getYearOfTourn());
-        newTourn.setPlayoffFlag(oldTourn.getPlayoffFlag());
+        newTourn.setIsPlayoffFlag(oldTourn.getIsPlayoffFlag());
 
         List<Team> teams = new ArrayList<>();
         List<Game> games = new ArrayList<>();
@@ -119,6 +131,7 @@ public class TournamentUtil {
         newPlayoff.setPlayoffTitle(oldPlayoff.getPlayoffTitle());
         newPlayoff.setCountGames(oldPlayoff.getCountGames());
         newPlayoff.setTeamInPlayoff(oldPlayoff.getTeamInPlayoff());
+        newPlayoff.setTeamsSort(oldPlayoff.getIsTeamsSort());
 
         List<Game> playoffGameList = new ArrayList<>();
         playoffGameList.addAll(oldPlayoff.getPlayoffGameList());
@@ -146,6 +159,7 @@ public class TournamentUtil {
         newPlayoff.setPlayoffTitle(oldPlayoff.getPlayoffTitle());
         newPlayoff.setCountGames(oldPlayoff.getCountGames());
         newPlayoff.setTeamInPlayoff(oldPlayoff.getTeamInPlayoff());
+        newPlayoff.setTeamsSort(oldPlayoff.getIsTeamsSort());
 
         List<Game> playoffGameList = new ArrayList<>();
         playoffGameList.addAll(oldPlayoff.getPlayoffGameList());
@@ -163,6 +177,7 @@ public class TournamentUtil {
         newPlayoff.setPlayoffFirstTurGames(playoffFirstTurGames);
         newPlayoff.setPlayoffSecondTurGames(playoffSecondTurGames);
         newPlayoff.setPlayoffLastTurGames(playoffLastTurGames);
+
 
         return newPlayoff;
     }

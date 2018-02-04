@@ -2,6 +2,7 @@ package com.labralab.zmsportclient.repository;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -14,6 +15,7 @@ import com.labralab.zmsportclient.models.Game;
 import com.labralab.zmsportclient.models.Playoff;
 import com.labralab.zmsportclient.models.Team;
 import com.labralab.zmsportclient.models.Tournament;
+import com.labralab.zmsportclient.models.simpleModels.BasePOJO;
 import com.labralab.zmsportclient.models.simpleModels.SimpleTournament;
 import com.labralab.zmsportclient.models.simpleModels.TournList;
 import com.labralab.zmsportclient.utils.TournamentUtil;
@@ -41,9 +43,8 @@ public class RealmDB implements TournamentRepository {
     DatabaseReference myRef;
     Retrofit retrofit;
     Api api;
-    Gson gson;
-    TournList tournList;
 
+    TournList tournList;
 
 
     public RealmDB() {
@@ -54,13 +55,9 @@ public class RealmDB implements TournamentRepository {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("tournaments");
 
-        gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://sporttournament-4679a.firebaseio.com")//url of firebase app
-                .addConverterFactory(GsonConverterFactory.create(gson))//use for convert JSON file into object
+                .addConverterFactory(GsonConverterFactory.create())//use for convert JSON file into object
                 .build();
 
         api = retrofit.create(Api.class);
@@ -70,30 +67,8 @@ public class RealmDB implements TournamentRepository {
     @Override
     public void createTournament(final Tournament tournament) {
 
-
-        addToRealm(tournament);
-
-        //copy to firebase
-        SimpleTournament simpleTournament = TournamentUtil.tournToSimpleTourn(tournament);
-        tournList.addTournament(simpleTournament);
-        myRef.setValue(tournList);
-
     }
 
-    @Override
-    public void createTournament(String tournTitle, String year, String type, List<Team> teamItems, List<Game> gameList, int teamInPlayoff, int loops, Boolean isPlayoffFlag) {
-
-    }
-
-    @Override
-    public void createTeamTable(SQLiteDatabase sqLiteDatabase, String tournTitle) {
-
-    }
-
-    @Override
-    public void createGameTable(SQLiteDatabase sqLiteDatabase, String tournTitle) {
-
-    }
 
     @Override
     public List<Tournament> readDBTourn(final StartFragment startFragment) {
@@ -105,68 +80,36 @@ public class RealmDB implements TournamentRepository {
 
         final List<Tournament> fBData = new ArrayList<>();
 
-        Call<TournList> call = api.detData();
+        Call<BasePOJO> call = api.detData();
 
-        call.enqueue(new Callback<TournList>() {
+        call.enqueue(new Callback<BasePOJO>() {
             @Override
-            public void onResponse(Call<TournList> call, Response<TournList> response) {
-                tournList = response.body();
+            public void onResponse(Call<BasePOJO> call, Response<BasePOJO> response) {
+                delAllFromRealm();
+                if (response.body() != null) {
+                    tournList = response.body().tournaments;
 
+                    for (SimpleTournament st : tournList.getList()) {
+                        fBData.add(TournamentUtil.simpleTournToHard(st));
+                        addToRealm(TournamentUtil.simpleTournToHard(st));
+                    }
+                }
+                startFragment.setData(fBData);
             }
 
             @Override
-            public void onFailure(Call<TournList> call, Throwable t) {
-
+            public void onFailure(Call<BasePOJO> call, Throwable t) {
+                Toast.makeText(startFragment.getContext()
+                        , "Связь с сервером не установлена"
+                        , Toast.LENGTH_LONG).show();
             }
         });
-//
-//        myRef.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//                SimpleTournament tournament = dataSnapshot.getValue(SimpleTournament.class);
-//
-//                if (tournament != null) {
-//                    Tournament item = TournamentUtil.simpleTournToHard(tournament);
-//                    delFromRealm(item.getTitle());
-//                    addToRealm(item);
-//
-//                    fBData.add(item);
-//                }
-//                startFragment.setData(fBData);
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
 
         return tournFromRealm;
     }
 
     @Override
     public void delTournament(final String title, Boolean isPlayoff) {
-
-        delFromRealm(title);
-        readRealmDB();
-        myRef.removeValue();
-        myRef.setValue(tournList);
 
     }
 
@@ -178,22 +121,7 @@ public class RealmDB implements TournamentRepository {
         return tournament;
     }
 
-    @Override
-    public void createPlayoff(String playoffTitle, int countGames, int teamInPlayoff, List<Team> teamItems, List<Game> gameList) {
-    }
-
-    @Override
-    public Playoff getPlayoff(String playoffTitle) {
-        return null;
-    }
-
-    @Override
-    public void delPlayoff(String title) {
-
-    }
-
-    public void delFromRealm(String title) {
-
+    private void delAllFromRealm() {
         boolean flag = false;
         if (!realm.isInTransaction()) {
             realm.beginTransaction();
@@ -201,16 +129,15 @@ public class RealmDB implements TournamentRepository {
         }
 
         RealmResults<Tournament> results = realm.where(Tournament.class)
-                .equalTo("title", title)
                 .findAll();
-        results.deleteFirstFromRealm();
+        results.deleteAllFromRealm();
 
         if (flag) {
             realm.commitTransaction();
         }
     }
 
-    public void addToRealm(Tournament tournament){
+    public void addToRealm(Tournament tournament) {
 
         //copy to Realm
         boolean flag = false;
@@ -219,25 +146,13 @@ public class RealmDB implements TournamentRepository {
             flag = true;
         }
 
-        realm.deleteAll();
         realm.copyToRealm(tournament);
-        for(SimpleTournament simpleTournament : tournList.getList()){
 
-            Tournament hardTournament = TournamentUtil.simpleTournToHard(simpleTournament);
-            realm.copyToRealm(hardTournament);
-        }
 
         if (flag) {
             realm.commitTransaction();
         }
     }
-    public void readRealmDB (){
 
-        RealmResults<Tournament> results = realm.where(Tournament.class).findAll();
-        List<SimpleTournament> items = new ArrayList<>();
-        for(Tournament tournament: results){
-            items.add(TournamentUtil.tournToSimpleTourn(tournament));
-        }
-        tournList.setList(items);
-    }
+
 }

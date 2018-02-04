@@ -62,42 +62,6 @@ public class GameListFragment extends Fragment {
 
         });
 
-
-//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//
-//            FloatingActionButton fab = TeamTabFragment.fab;
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//
-//                if (dy > 0) {
-//                    // Scroll Down
-//                    if (fab.isShown()) {
-//
-//
-//                        final Animation fallingAnimation = AnimationUtils.loadAnimation(recyclerView.getContext(),
-//                                R.anim.out_doun);
-//                        fallingAnimation.setInterpolator(new LinearInterpolator());
-//                        TeamActivity.getSegmentTabLayout().startAnimation(fallingAnimation);
-//                        TeamActivity.getSegmentTabLayout().setVisibility(View.INVISIBLE);
-//                        fab.hide();
-//                        rvTouch = false;
-//                    }
-//                } else if (dy < 0) {
-//                    // Scroll Up
-//                    if (!fab.isShown()) {
-//                        fab.show();
-//                        final Animation fallingAnimation = AnimationUtils.loadAnimation(recyclerView.getContext(),
-//                                R.anim.in_up);
-//                        fallingAnimation.setInterpolator(new LinearOutSlowInInterpolator());
-//                        TeamActivity.getSegmentTabLayout().startAnimation(fallingAnimation);
-//                        TeamActivity.getSegmentTabLayout().setVisibility(View.VISIBLE);
-//                        rvTouch = false;
-//                    }
-//                }
-//            }
-//        });
     }
 }
 

@@ -108,11 +108,11 @@ public class SimpleTournament {
         this.playoff = playoff;
     }
 
-    public Boolean getPlayoffFlag() {
+    public Boolean getIsPlayoffFlag() {
         return isPlayoffFlag;
     }
 
-    public void setPlayoffFlag(Boolean playoffFlag) {
+    public void setIsPlayoffFlag(Boolean playoffFlag) {
         isPlayoffFlag = playoffFlag;
     }
 }

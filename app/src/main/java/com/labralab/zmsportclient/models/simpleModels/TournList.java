@@ -1,5 +1,6 @@
 package com.labralab.zmsportclient.models.simpleModels;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -11,8 +12,13 @@ import java.util.List;
 
 public class TournList {
 
-    @SerializedName("tournaments")
+    @SerializedName("list")
+    @Expose
     private List<SimpleTournament> list;
+
+    public TournList() {
+        list = new ArrayList<>();
+    }
 
     public List<SimpleTournament> getList() {
         return list;

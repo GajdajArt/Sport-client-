@@ -18,6 +18,8 @@ public class SimplePlayoff {
     private int countGames = -1;
     private int teamInPlayoff;
 
+    private boolean isTeamsSort;
+
     private List<Game> playoffGameList = new ArrayList<>();
     private List<Team> playoffTeamList = new ArrayList<>();
 
@@ -26,6 +28,14 @@ public class SimplePlayoff {
     private List<Game> playoffLastTurGames = new ArrayList<>();
 
     public SimplePlayoff() {
+    }
+
+    public boolean getIsTeamsSort() {
+        return isTeamsSort;
+    }
+
+    public void setTeamsSort(boolean teamsSort) {
+        isTeamsSort = teamsSort;
     }
 
     public String getPlayoffTitle() {

@@ -9,7 +9,7 @@ import io.realm.RealmObject;
 
 
 @IgnoreExtraProperties
-public class Team extends RealmObject implements Comparable<Team>, Serializable {
+public class Team extends RealmObject implements Comparable<Team>, Serializable{
 
 
     private String title;

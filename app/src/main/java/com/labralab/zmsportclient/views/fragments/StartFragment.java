@@ -67,9 +67,9 @@ public class StartFragment extends Fragment {
 
         showProgressBar();
 
-//        //Starting first hint
-//        firstHint();
-//
+        //Starting first hint
+        firstHint();
+
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {

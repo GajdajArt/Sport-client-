@@ -1,5 +1,6 @@
 package com.labralab.zmsportclient.repository;
 
+import com.labralab.zmsportclient.models.simpleModels.BasePOJO;
 import com.labralab.zmsportclient.models.simpleModels.SimpleTournament;
 import com.labralab.zmsportclient.models.simpleModels.TournList;
 
@@ -14,6 +15,6 @@ import retrofit2.http.GET;
 
 public interface Api {
 
-    @GET("/tournaments/.json")
-    Call<TournList> detData();
+    @GET("/.json")
+    Call<BasePOJO> detData();
 }

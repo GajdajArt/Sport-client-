@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:text="Title"
-                    android:textSize="14dp" />
+                    android:textSize="8pt" />
 
                 <TextView
                     android:id="@+id/date"
@@ -51,7 +51,7 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:text="2017"
-                    android:textSize="8dp" />
+                    android:textSize="4pt" />
             </LinearLayout>
 
             <TextView
@@ -59,9 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/basketball"
-                android:textSize="8dp" />
+                android:textSize="4pt" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 

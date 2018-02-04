@@ -36,6 +36,10 @@ public class Playoff extends RealmObject {
     private RealmList<Game> playoffFirstTurGames;
     private RealmList<Game> playoffSecondTurGames;
     private RealmList<Game> playoffLastTurGames;
+
+
+    private boolean isTeamsSort;
+
     @Ignore
     private TournamentRepository repository;
 
@@ -57,6 +61,7 @@ public class Playoff extends RealmObject {
             this.playoffGameList = new RealmList<>();
             this.playoffLastTurGames = new RealmList<>();
             this.playoffSecondTurGames = new RealmList<>();
+            this.isTeamsSort = false;
 
             for (int i = 0; i < teamInPlayoff; i++) {
 
@@ -80,12 +85,13 @@ public class Playoff extends RealmObject {
         }
     }
 
-    public Playoff(String playoffTitle, int countGames, int teamInPlayoff, List<Game> playoffGameList, List<Team> playoffTeamList) {
+    public Playoff(String playoffTitle, int countGames, int teamInPlayoff, List<Game> playoffGameList, List<Team> playoffTeamList, boolean isTeamsSort) {
 
 
         this.playoffTitle = playoffTitle;
         this.countGames = countGames;
         this.teamInPlayoff = teamInPlayoff;
+        this.isTeamsSort = isTeamsSort;
         this.playoffGameList.addAll(playoffGameList);
         this.playoffTeamList.addAll(playoffTeamList);
     }
@@ -107,19 +113,58 @@ public class Playoff extends RealmObject {
             flag = true;
         }
 
-        List<Team> newTeamList = new ArrayList<>();
-        for (int i = 0; i < playoffTeamList.size() / 2; i++) {
+        if (!isTeamsSort) {
+            List<Team> newTeamList = new ArrayList<>();
+            for (int i = 0; i < playoffTeamList.size() / 2; i++) {
 
-            Game game = new Game(playoffTeamList.get(i),
-                    playoffTeamList.get((playoffTeamList.size() - 1) - i));
+                Game game = new Game(playoffTeamList.get(i),
+                        playoffTeamList.get((playoffTeamList.size() - 1) - i));
 
-            newTeamList.add(playoffTeamList.get(i));
-            newTeamList.add(playoffTeamList.get((playoffTeamList.size() - 1) - i));
+                newTeamList.add(playoffTeamList.get(i));
+                newTeamList.add(playoffTeamList.get((playoffTeamList.size() - 1) - i));
 
-            playoffGameList.add(game);
+                playoffGameList.add(game);
+            }
+            playoffTeamList.clear();
+            playoffTeamList.addAll(newTeamList);
+        }else {
+
+            playoffGameList.clear();
+            int i = 0;
+            while (i < playoffTeamList.size())  {
+
+                Game game = new Game(playoffTeamList.get(i),
+                        playoffTeamList.get(i+1));
+                i = i + 2;
+
+                playoffGameList.add(game);
+            }
         }
 
-        playoffTeamList.addAll(newTeamList);
+        if (flag) {
+            realm.commitTransaction();
+        }
+    }
+    public void setTeamListAfterSort(List<Team> teamList){
+
+        realm = Realm.getDefaultInstance();
+        boolean flag = false;
+        if (!realm.isInTransaction()) {
+            realm.beginTransaction();
+            flag = true;
+        }
+
+        this.playoffTeamList.clear();
+        this.playoffTeamList.addAll(teamList);
+        this.isTeamsSort = true;
+        onGameListCreate();
+        addEmptyGames();
+
+        repository = new RealmDB();
+        Tournament tournament = Tournament.getInstance(playoffTitle, null);
+        tournament.setPlayoff(this);
+        repository.delTournament(playoffTitle, true);
+        repository.createTournament(tournament);
 
         if (flag) {
             realm.commitTransaction();
@@ -245,23 +290,23 @@ public class Playoff extends RealmObject {
         team_two.plusGame();
 
         if (score_1 > score_2) {
-
-            team_one.plusGameWon();
-            team_two.plusGameLost();
-
-            team_one.plusPoints();
-            team_one.plusPoints();
+//
+//            team_one.plusGameWon();
+//            team_two.plusGameLost();
+//
+//            team_one.plusPoints();
+//            team_one.plusPoints();
 
             winner = team_one;
 
         } else {
             if (score_1 < score_2) {
-
-                team_two.plusGameWon();
-                team_one.plusGameLost();
-
-                team_two.plusPoints();
-                team_two.plusPoints();
+//
+//                team_two.plusGameWon();
+//                team_one.plusGameLost();
+//
+//                team_two.plusPoints();
+//                team_two.plusPoints();
 
                 winner = team_two;
             }
@@ -284,7 +329,51 @@ public class Playoff extends RealmObject {
 
 
         repository = new RealmDB();
-        Tournament tournament = repository.getTournament(playoffTitle);
+        Tournament tournament = Tournament.getInstance(playoffTitle, context);
+        tournament.setPlayoff(this);
+        repository.delTournament(playoffTitle, true);
+        repository.createTournament(tournament);
+
+        if (flag) {
+            realm.commitTransaction();
+        }
+    }
+
+    public void removeGame(String team_1, String team_2, Context context){
+
+        realm = Realm.getDefaultInstance();
+        boolean flag = false;
+        if (!realm.isInTransaction()) {
+            realm.beginTransaction();
+            flag = true;
+        }
+
+        Team team_one = playoffTeamList.get(TournamentUtil.getTeam(playoffTeamList, team_1));
+        Team team_two = playoffTeamList.get(TournamentUtil.getTeam(playoffTeamList, team_2));
+
+        Team winner = playoffTeamList.get(playoffTeamList.size() - 1);
+
+        int currentPos = TournamentUtil.getGame(playoffGameList, team_1, team_2);
+        int nextPos;
+        countGames--;
+
+        Game game = playoffGameList.get(currentPos);
+        game.setScore_1(0);
+        game.setScore_2(0);
+        game.setDay(0);
+        game.setMonth(0);
+        game.setYear(0);
+
+        nextPos = nextGameForWinner(team_one, team_two, currentPos);
+        if (playoffGameList.get(nextPos).getTeam_1().getTitle().equals(team_1) || playoffGameList.get(nextPos).getTeam_1().getTitle().equals(team_2)) {
+            playoffGameList.get(nextPos).setTeam_1(winner);
+        } else {
+            playoffGameList.get(nextPos).setTeam_2(winner);
+        }
+
+
+        repository = new RealmDB();
+        Tournament tournament = Tournament.getInstance(playoffTitle, context);
         tournament.setPlayoff(this);
         repository.delTournament(playoffTitle, true);
         repository.createTournament(tournament);
@@ -308,6 +397,8 @@ public class Playoff extends RealmObject {
         Team teamOne = new Team("__");
         playoffTeamList.add(teamOne);
         Game game = new Game(teamOne, teamOne, 0, 0, 0, 0, 0);
+        playoffLastTurGames.clear();
+        playoffSecondTurGames.clear();
         playoffLastTurGames.add(game);
         for (int i = 0; i < 2; i++) {
             playoffSecondTurGames.add(game);
@@ -363,6 +454,14 @@ public class Playoff extends RealmObject {
 
         //Position return value
         return nextPosition;
+    }
+
+    public boolean getIsTeamsSort() {
+        return isTeamsSort;
+    }
+
+    public void setTeamsSort(boolean teamsSort) {
+        isTeamsSort = teamsSort;
     }
 
     public void setPlayoffTitle(String playoffTitle) {

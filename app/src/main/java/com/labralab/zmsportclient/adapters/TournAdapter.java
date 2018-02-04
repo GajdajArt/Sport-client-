@@ -61,9 +61,7 @@ public class TournAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
 }
 
-class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-
-    public static final int TOURN_ADAPTER_ID = 1;
+class RecyclerViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
 
     View itemView;
     TextView title;
@@ -75,7 +73,6 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnLongC
     public RecyclerViewHolder(View itemView) {
         super(itemView);
 
-        itemView.setOnLongClickListener(this);
         itemView.setOnClickListener(this);
         this.itemView = itemView;
         title = (TextView) itemView.findViewById(R.id.title);
@@ -93,20 +90,9 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnLongC
         //Запускаем TeamActivity с заданным турниром
         Context context = view.getContext();
         Intent intent = new Intent(context, TeamActivity.class);
-        String tableName = title.getText().toString().replace(" ", "_");
-        intent.putExtra("title", tableName);
+       intent.putExtra("title", title.getText());
         view.getContext().startActivity(intent);
 
     }
 
-    //Обработка длинного нажатия
-    @Override
-    public boolean onLongClick(View view) {
-
-//        //Вызываем диалог изменения - удаления
-//        QuickActionDialog quickActionDialog = new QuickActionDialog(tournImage,
-//                TOURN_ADAPTER_ID, title.getText().toString());
-//        quickActionDialog.onActionStart();
-        return true;
-    }
 }
