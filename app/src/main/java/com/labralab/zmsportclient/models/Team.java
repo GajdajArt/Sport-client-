@@ -2,6 +2,7 @@ package com.labralab.zmsportclient.models;
 
 
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.labralab.zmsportclient.utils.SortUtil;
 
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ public class Team extends RealmObject implements Comparable<Team>, Serializable{
     private int games;
     private int games_won;
     private int games_lost;
+    private int plusMinus;
 
 
     public Team(String title) {
@@ -25,6 +27,7 @@ public class Team extends RealmObject implements Comparable<Team>, Serializable{
         this.games = 0;
         this.games_won = 0;
         this.games_lost = 0;
+        this.plusMinus = 0;
     }
 
     public Team() {
@@ -32,6 +35,19 @@ public class Team extends RealmObject implements Comparable<Team>, Serializable{
     }
 
     //Getters and Setters
+    public int getPlusMinus() {
+        return plusMinus;
+    }
+
+    public void setPMIfW(int dif) {
+        plusMinus = plusMinus + dif;
+    }
+
+    public void setPMIfL(int dif) {
+        plusMinus = plusMinus - dif;
+    }
+
+
     public int getPoints() {
         return points;
     }
@@ -110,6 +126,7 @@ public class Team extends RealmObject implements Comparable<Team>, Serializable{
     public int compareTo(Team team) {
         int pointsSort = team.points - this.points;
         int gameSort = this.games - team.games;
+
         if (pointsSort == 0) {
             pointsSort = 1;
         }

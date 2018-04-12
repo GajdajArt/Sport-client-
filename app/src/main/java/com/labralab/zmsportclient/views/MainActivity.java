@@ -44,18 +44,18 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         //if splash checkBox is ...
-        if (sPref.getBoolean(SPLASH, true)) {
+        if (sPref.getBoolean(SPLASH, false)) {
+
+            //Run Start Fragment
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, startFragment)
+                    .commit();
+        } else {
 
             //Run splash fragment
             SplashFragment splashFragment = new SplashFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, splashFragment)
-                    .commit();
-        } else {
-
-            //Run Start Fragment
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, startFragment)
                     .commit();
         }
    }

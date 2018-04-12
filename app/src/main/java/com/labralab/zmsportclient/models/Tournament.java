@@ -333,6 +333,10 @@ public class Tournament extends RealmObject implements Serializable {
             team_one.plusPoints();
             team_one.plusPoints();
 
+            int dif = score_1 - score_2;
+            team_one.setPMIfW(dif);
+            team_two.setPMIfL(dif);
+
             if (type.equals("Футбол")) {
                 team_one.plusPoints();
                 team_two.plusPoints();
@@ -346,6 +350,10 @@ public class Tournament extends RealmObject implements Serializable {
 
                 team_two.plusPoints();
                 team_two.plusPoints();
+
+                int dif = score_2 - score_1;
+                team_two.setPMIfW(dif);
+                team_one.setPMIfL(dif);
 
                 if (type.equals("Футбол")) {
                     team_one.plusPoints();
@@ -382,6 +390,10 @@ public class Tournament extends RealmObject implements Serializable {
             team_one.minusPoints();
             team_one.minusPoints();
 
+            int dif = gameList.get(id).getScore_1() - gameList.get(id).getScore_2();
+            team_one.setPMIfL(dif);
+            team_two.setPMIfW(dif);
+
             if (type.equals("Футбол")) {
                 team_one.minusPoints();
                 team_two.minusPoints();
@@ -395,6 +407,10 @@ public class Tournament extends RealmObject implements Serializable {
 
                 team_two.minusPoints();
                 team_two.minusPoints();
+
+                int dif = gameList.get(id).getScore_2() - gameList.get(id).getScore_1();
+                team_one.setPMIfW(dif);
+                team_two.setPMIfL(dif);
 
                 if (type.equals("Футбол")) {
                     team_two.minusPoints();

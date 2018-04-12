@@ -23,6 +23,7 @@ import com.labralab.zmsportclient.R;
 import com.labralab.zmsportclient.adapters.TeamStatAdapter;
 import com.labralab.zmsportclient.models.Team;
 import com.labralab.zmsportclient.models.Tournament;
+import com.labralab.zmsportclient.utils.SortUtil;
 import com.labralab.zmsportclient.views.TeamActivity;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class TeamListFragment extends Fragment {
         Tournament tournament = Tournament.getInstance();
         //Getting TeamList
         List<Team> teamList = tournament.getTeamList();
-        Set<Team> items = new TreeSet<>(teamList);
+        List<Team> items = SortUtil.Companion.sort(teamList);
 
         recyclerView.setLayoutManager(layoutManager);
         statAdapter = new TeamStatAdapter(items);

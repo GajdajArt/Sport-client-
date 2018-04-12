@@ -18,7 +18,7 @@ public class TeamStatAdapter extends RecyclerView.Adapter<TeamStatsRecyclerViewH
 
     List<Team> items = new ArrayList<>();
 
-    public TeamStatAdapter(Set<Team> items) {
+    public TeamStatAdapter(List<Team> items) {
         this.items.addAll(items);
         int i = items.size();
 

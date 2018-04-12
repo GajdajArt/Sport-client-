@@ -6,7 +6,7 @@
     <item
         android:id="@+id/action_splash"
         android:orderInCategory="100"
-        android:title="не показывать"
+        android:title="не показывать собаку"
         app:showAsAction="never"
         android:checkable="true"/>
 </menu>

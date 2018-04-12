@@ -95,6 +95,7 @@ public class RealmDB implements TournamentRepository {
                     }
                 }
                 startFragment.setData(fBData);
+                startFragment.hideRefreshing();
             }
 
             @Override
@@ -102,6 +103,7 @@ public class RealmDB implements TournamentRepository {
                 Toast.makeText(startFragment.getContext()
                         , "Связь с сервером не установлена"
                         , Toast.LENGTH_LONG).show();
+                startFragment.hideRefreshing();
             }
         });
 

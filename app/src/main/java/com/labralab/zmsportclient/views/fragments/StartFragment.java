@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +36,8 @@ public class StartFragment extends Fragment {
     private Tournament tournament;
     private ProgressBar progressBar;
     private TextView hint;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     Handler handler;
 
@@ -58,6 +61,16 @@ public class StartFragment extends Fragment {
 
         AppCompatActivity mainActivity = (AppCompatActivity) getActivity();
         mainActivity.getSupportActionBar().show();
+
+        swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.swipeLayout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                tournament.getTournList(StartFragment.this);
+            }
+        });
+
 
 
         adapter = new TournAdapter(items);
@@ -109,14 +122,7 @@ public class StartFragment extends Fragment {
         }
     }
 
-    public void newTournFragmentStart() {
 
-//        //Starting newTournFragment
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.container, MainActivity.getNewTournFragment())
-//                .addToBackStack(null)
-//                .commit();
-    }
 
     //For getting adapter
     public static TournAdapter getAdapter() {
@@ -141,6 +147,11 @@ public class StartFragment extends Fragment {
         progressBar.setVisibility(View.INVISIBLE);
         firstHint();
     }
+
+    public void hideRefreshing(){
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
 }
 
 

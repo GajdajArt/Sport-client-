@@ -31,7 +31,7 @@ public class TournamentUtil {
 
     public static int getGame(List<Game> gameList, String teamOne, String teamTwo) {
 
-        for (int i = 0; i <= gameList.size(); i++) {
+        for (int i = 0; i < gameList.size(); i++) {
             if (gameList.get(i).getTeam_1().getTitle().equals(teamOne) && gameList.get(i).getTeam_2().getTitle().equals(teamTwo)) {
                 return i;
             }
